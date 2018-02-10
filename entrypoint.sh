@@ -41,6 +41,7 @@ if [ "$CONFIG_FILE" != '' ]; then
 
     if [ "$CONF__PGBOUNCER__AUTH_FILE" != '' -a ! -f "$CONF__PGBOUNCER__AUTH_FILE" ]; then
         mkdir -p $(dirname "$CONF__PGBOUNCER__AUTH_FILE")
+        touch "$CONF__PGBOUNCER__AUTH_FILE"
         env | grep ^AUTH__ | while IFS='=' read user pass ; do
             user=${user#AUTH__}
             user=$(echo $user | tr '[:upper:]' '[:lower:]')
