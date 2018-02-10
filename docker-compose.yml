@@ -1,0 +1,38 @@
+version: '2.3'
+
+services:
+
+  pgbouncer:
+    image: tophfr/pgbouncer:$VERSION
+    build:
+      context: .
+      args:
+        PGBOUNCER_VERSION: $VERSION
+    volumes:
+     - ./entrypoint.sh:/usr/local/bin/docker-pgbouncer-entrypoint.sh
+    environment:
+      DEFAULT_HOST: db
+      AUTH__POSTGRES: password
+      CONF__PGBOUNCER__POOL_MODE: transaction
+    ports:
+      - 6432:5432
+
+  db:
+    image: postgres:10.2-alpine
+    environment:
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
+
+  test:
+    image: tophfr/swissknife
+    environment:
+      PGPASSWORD: password
+    scale: 10
+    command: >
+      dockerize -wait tcp://db:5432
+      dockerize -wait tcp://pgbouncer:5432
+      psql -qtX -h pgbouncer -U postgres -c "select 'OK'"
+
+
+# vim: ts=2 sts=2 sw=2 et:
