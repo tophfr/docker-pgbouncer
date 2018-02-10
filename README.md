@@ -1,4 +1,4 @@
-# mailcatcher docker image
+# pgbouncer docker image
 
 Here is an unofficial Dockerfile for [PgBouncer][pgbouncer].
 
@@ -27,7 +27,7 @@ Environment variables:
 | Variable name                  | Default value                  | Description
 | ------------------------------ | ------------------------------ | -----------
 | `CONFIG_FILE`                  | `/etc/pgbouncer/pgbouncer.ini` |
-| `DEFAULT_*i`                   |                                | Configuration for the defaut (`*`) database. See database section in [PgBouncer doc][pgbdoc_db] for available variable names.
+| `DEFAULT_*`                    |                                | Configuration for the defaut (`*`) database. See database section in [PgBouncer doc][pgbdoc_db] for available variable names.
 | `CONF__DATABASES__*`           |                                | Variable name has to end with DB name and value should be populated as described in the [PgBouncer doc][pgbdoc_db].
 | `CONF__DATABASES____`          |                                | Special value for `*` database. Generated if `DEFAULT_*` vars are defined.
 | `CONF__PGBOUNCER__LISTEN_ADDR` | `*`                            | You should'nt touch this if you want pgbouncer to work in the docker world.
