@@ -2,7 +2,7 @@
 
 Here is an unofficial Dockerfile for [PgBouncer][pgbouncer].
 
-It is a very small image (~XX MB uncompressed) available on [docker hub][dockerhubpage] based on [Alpine Linux][alpinehubpage] and using the last available release from the official Github repo of [PgBouncer][pgbouncer].
+It is a very small image (~15 MB uncompressed) available on [docker hub][dockerhubpage] based on [Alpine Linux][alpinehubpage] and using the last available release from the official Github repo of [PgBouncer][pgbouncer].
 
 
 ## Changelog
@@ -24,21 +24,21 @@ Run it:
 
 Environment variables:
 
-| Variable name                  | Default value                | Description
-| ------------------------------ | ---------------------------- | -----------
-| `CONFIG_FILE`                  | /etc/pgbouncer/pgbouncer.ini |
-| `DEFAULT_*i`                   |                              | Configuration for the defaut (`*`) database. See database section in [PgBouncer doc][pgbdoc_db] for available variable names.
-| `CONF__DATABASES__*`           |                              | Variable name has to end with DB name and value should be populated as described in the [PgBouncer doc][pgbdoc_db].
-| `CONF__DATABASES____`          |                              | Special value for `*` database. Generated if `DEFAULT_*` vars are defined.
-| `CONF__PGBOUNCER__LISTEN_ADDR` | *                            | You should'nt touch this if you want pgbouncer to work in the docker world.
-| `CONF__PGBOUNCER__LISTEN_PORT` | 5432                         |
-| `CONF__PGBOUNCER__USER`        | postgres                     |
-| `CONF__PGBOUNCER__AUTH_FILE`   | /etc/pgbouncer/auth.txt      |
-| `CONF__PGBOUNCER__*`           | see [PgBouncer doc][pgbdoc]  | Variable name has to end with any PgBouncer setting. Please refer to [PgBouncer doc][pgbdoc_db].
-| `CONF__USERS__*`               |                              | Will fill the users section of the config file. Please refer to [PgBouncer doc][pgbdoc_usr].
-| `AUTH__*`                      |                              | Allow you to define a list of user/password tha will be put in the auth file.
+| Variable name                  | Default value                  | Description
+| ------------------------------ | ------------------------------ | -----------
+| `CONFIG_FILE`                  | `/etc/pgbouncer/pgbouncer.ini` |
+| `DEFAULT_*i`                   |                                | Configuration for the defaut (`*`) database. See database section in [PgBouncer doc][pgbdoc_db] for available variable names.
+| `CONF__DATABASES__*`           |                                | Variable name has to end with DB name and value should be populated as described in the [PgBouncer doc][pgbdoc_db].
+| `CONF__DATABASES____`          |                                | Special value for `*` database. Generated if `DEFAULT_*` vars are defined.
+| `CONF__PGBOUNCER__LISTEN_ADDR` | `*`                            | You should'nt touch this if you want pgbouncer to work in the docker world.
+| `CONF__PGBOUNCER__LISTEN_PORT` | `5432`                         |
+| `CONF__PGBOUNCER__USER`        | `postgres`                     |
+| `CONF__PGBOUNCER__AUTH_FILE`   | `/etc/pgbouncer/auth.txt`      |
+| `CONF__PGBOUNCER__*`           | see [PgBouncer doc][pgbdoc]    | Variable name has to end with any PgBouncer setting. Please refer to [PgBouncer doc][pgbdoc_db].
+| `CONF__USERS__*`               |                                | Will fill the users section of the config file. Please refer to [PgBouncer doc][pgbdoc_usr].
+| `AUTH__*`                      |                                | Allow you to define a list of user/password tha will be put in the auth file.
 
-/If you encounter any limitation by using env vars, please use your own config file and not the generated one./
+*If you encounter any limitation by using env vars, please use your own config file and not the generated one.*
 
 
 ## Build
