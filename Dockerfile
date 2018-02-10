@@ -8,7 +8,7 @@ ARG PGBOUNCER_SHA256=fa8bde2a2d2c8c80d53a859f8e48bc6713cf127e31c77d8f787bbc1d673
 ENV PGBOUNCER_VERSION $PGBOUNCER_VERSION
 RUN apk add --no-cache libevent openssl c-ares \
     && apk add --no-cache --virtual .build-deps git build-base automake libtool m4 autoconf libevent-dev openssl-dev c-ares-dev \
-    && wget https://pgbouncer.github.io/downloads/files/1.8.1/pgbouncer-$PGBOUNCER_VERSION.tar.gz \
+    && wget https://pgbouncer.github.io/downloads/files/$PGBOUNCER_VERSION/pgbouncer-$PGBOUNCER_VERSION.tar.gz \
     && echo "$PGBOUNCER_SHA256  pgbouncer-$PGBOUNCER_VERSION.tar.gz" | sha256sum -c - \
     && tar xzf pgbouncer-$PGBOUNCER_VERSION.tar.gz \
     && cd pgbouncer-$PGBOUNCER_VERSION \
