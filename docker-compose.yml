@@ -8,6 +8,7 @@ services:
       context: .
       args:
         PGBOUNCER_VERSION: $VERSION
+        PGBOUNCER_SHA256:  $SHA256
     volumes:
      - ./entrypoint.sh:/usr/local/bin/docker-pgbouncer-entrypoint.sh
     environment:
