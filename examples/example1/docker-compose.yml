@@ -1,0 +1,76 @@
+version: '2.3'
+
+services:
+
+  pgbouncer:
+    image: tophfr/pgbouncer
+    environment:
+      DEFAULT_HOST: db1
+      CONF__DATABASES__TEST2: host=db2 dbname=dbtest2
+      CONF__DATABASES__TEST3: host=db2 dbname=dbtest3
+      CONF__PGBOUNCER__POOL_MODE: transaction
+      CONF__PGBOUNCER__AUTH_TYPE: trust
+      CONF__PGBOUNCER__LOG_CONNECTIONS: 0
+      CONF__PGBOUNCER__LOG_DISCONNECTIONS: 0
+      AUTH__POSTGRES: password1
+      AUTH__USER1: secret1
+      AUTH__USER2: secret2
+    depends_on:
+      - db1
+      - db2
+    networks:
+      default:
+      db1:
+      db2:
+
+  db1:
+    image: postgres:10.2-alpine
+    environment:
+      POSTGRES_PASSWORD: password1
+    volumes:
+      - db1:/var/lib/postgresql/data
+    networks:
+      db1:
+
+  db2:
+    image: postgres:10.2-alpine
+    volumes:
+      - ./db2/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - db2:/var/lib/postgresql/data
+    networks:
+      db2:
+
+  test1:
+    image: tophfr/swissknife
+    depends_on: [ pgbouncer ]
+    environment:
+      PGPASSWORD: bipbip
+    scale: 10
+    command: psql -qtX -h pgbouncer -U postgres -c "select 'OK'"
+
+  test2:
+    image: tophfr/swissknife
+    depends_on: [ pgbouncer ]
+    environment:
+      PGPASSWORD: anything
+    scale: 10
+    command: psql -qtX -h pgbouncer -U user1 -d test2 -c "select count(*), sum(field1) from table1"
+
+  test3:
+    image: tophfr/swissknife
+    depends_on: [ pgbouncer ]
+    environment:
+      PGPASSWORD: whatever
+    scale: 10
+    command: psql -qtX -h pgbouncer -U user2 -d test3 -c "select count(*), sum(field1) from table1"
+
+volumes:
+  db1:
+  db2:
+
+networks:
+  default:
+  db1:
+  db2:
+
+# vim: ts=2 sts=2 sw=2 et:
