@@ -3,7 +3,7 @@ version: '2.3'
 services:
 
   pgbouncer:
-    image: tophfr/pgbouncer:$VERSION
+    image: tophfr/pgbouncer:$TAG
     build:
       context: .
       args:

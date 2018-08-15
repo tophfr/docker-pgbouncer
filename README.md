@@ -7,6 +7,8 @@ It is a very small image (~15 MB uncompressed) available on [docker hub][dockerh
 
 ## Changelog
 
+- 2018-08-15 Upgrading PgBouncer to 1.9.0
+- 2018-07-07 Upgrading Alpine Linux from 3.7 to 3.8
 - 2018-02-08 Initial version: PgBouncer 1.8.1 on Alpine Linux 3.7
 
 
