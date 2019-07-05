@@ -2,11 +2,12 @@
 
 Here is an unofficial Dockerfile for [PgBouncer][pgbouncer].
 
-It is a very small image (~15 MB uncompressed) available on [docker hub][dockerhubpage] based on [Alpine Linux][alpinehubpage] and using the last available release from the official Github repo of [PgBouncer][pgbouncer].
+It is a very small image (~14 MB uncompressed) available on [docker hub][dockerhubpage] based on [Alpine Linux][alpinehubpage] and using the last available release from the official Github repo of [PgBouncer][pgbouncer].
 
 
 ## Changelog
 
+- 2019-07-05 Upgrading PgBouncer to 1.10.0
 - 2018-08-15 Upgrading PgBouncer to 1.9.0
 - 2018-07-07 Upgrading Alpine Linux from 3.7 to 3.8
 - 2018-02-08 Initial version: PgBouncer 1.8.1 on Alpine Linux 3.7
