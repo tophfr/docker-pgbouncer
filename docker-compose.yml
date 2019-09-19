@@ -5,12 +5,12 @@ services:
   pgbouncer:
     image: tophfr/pgbouncer:$TAG
     build:
-      context: .
+      context: build
       args:
         PGBOUNCER_VERSION: $VERSION
         PGBOUNCER_SHA256:  $SHA256
     volumes:
-     - ./entrypoint.sh:/usr/local/bin/docker-pgbouncer-entrypoint.sh
+     - ./build/entrypoint.sh:/usr/local/bin/docker-pgbouncer-entrypoint.sh
     environment:
       DEFAULT_HOST: db
       AUTH__POSTGRES: password
@@ -19,7 +19,7 @@ services:
       - 6432:5432
 
   db:
-    image: postgres:10.2-alpine
+    image: postgres:12-alpine
     environment:
       POSTGRES_PASSWORD: password
     ports:
