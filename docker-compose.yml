@@ -31,7 +31,6 @@ services:
       PGPASSWORD: password
     scale: 10
     command: >
-      dockerize -wait tcp://db:5432
       dockerize -wait tcp://pgbouncer:5432
       psql -qtX -h pgbouncer -U postgres -c "select 'OK'"
 
