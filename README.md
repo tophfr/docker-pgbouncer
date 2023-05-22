@@ -7,6 +7,7 @@ It is a very small image (~14 MB uncompressed) available on [docker hub][dockerh
 
 ## Changelog
 
+- 2023-05-19 Upgrading PgBouncer to 1.19.0 and Alpine Linux to 3.18, create default postgres user/group
 - 2019-10-22 Upgrading PgBouncer to 1.12.0 and Alpine Linux to 3.10
 - 2019-09-19 Upgrading PgBouncer to 1.11.0
 - 2019-07-05 Upgrading PgBouncer to 1.10.0

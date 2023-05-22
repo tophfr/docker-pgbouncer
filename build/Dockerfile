@@ -1,9 +1,9 @@
-FROM alpine:3.10
+FROM alpine:3.18
 
 MAINTAINER toph <toph@toph.fr>
 
-ARG PGBOUNCER_VERSION=1.12.0
-ARG PGBOUNCER_SHA256=1b3c6564376cafa0da98df3520f0e932bb2aebaf9a95ca5b9fa461e9eb7b273e
+ARG PGBOUNCER_VERSION=1.19.0
+ARG PGBOUNCER_SHA256=af0b05e97d0e1fd9ad45fe00ea6d2a934c63075f67f7e2ccef2ca59e3d8ce682
 
 ENV PGBOUNCER_VERSION $PGBOUNCER_VERSION
 RUN apk add --no-cache libevent openssl c-ares \
@@ -24,6 +24,8 @@ RUN apk add --no-cache libevent openssl c-ares \
 RUN apk add --no-cache bash
 
 # default config values
+RUN addgroup -g 70 postgres
+RUN adduser -u 70 -G postgres -h /var/lib/postgresql -s /bin/sh postgres -D -H -g ""
 ENV CONFIG_FILE /etc/pgbouncer/pgbouncer.ini
 ENV CONF__PGBOUNCER__LISTEN_ADDR *
 ENV CONF__PGBOUNCER__LISTEN_PORT 5432
@@ -35,4 +37,3 @@ COPY ./entrypoint.sh /usr/local/bin/docker-pgbouncer-entrypoint.sh
 EXPOSE $CONF__PGBOUNCER__LISTEN_PORT
 
 ENTRYPOINT ["/usr/local/bin/docker-pgbouncer-entrypoint.sh"]
-
